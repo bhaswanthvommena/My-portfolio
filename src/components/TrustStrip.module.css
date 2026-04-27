@@ -1,0 +1,51 @@
+.strip {
+  width: 100%;
+  padding: 1.5rem 0;
+  background: rgba(10, 10, 10, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+}
+
+.marquee {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  animation: scroll 40s linear infinite;
+}
+
+.strip:hover .marquee {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.item:hover {
+  color: #fff;
+}
+
+.icon {
+  color: var(--neon-blue);
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
