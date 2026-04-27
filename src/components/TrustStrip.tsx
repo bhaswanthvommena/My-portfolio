@@ -1,6 +1,6 @@
 "use client";
 
-
+import { useState } from "react";
 import { Database, Zap, Code, Briefcase, Globe } from "lucide-react";
 import styles from "./TrustStrip.module.css";
 
@@ -13,12 +13,22 @@ const items = [
 ];
 
 export default function TrustStrip() {
+  const [isPaused, setIsPaused] = useState(false);
   // Duplicate items for seamless loop
   const displayItems = [...items, ...items, ...items, ...items];
 
   return (
-    <div className={styles.strip}>
-      <div className={styles.marquee}>
+    <div 
+      className={styles.strip}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div 
+        className={styles.marquee}
+        style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
+      >
         {displayItems.map((item, index) => {
           const Icon = item.icon;
           return (
