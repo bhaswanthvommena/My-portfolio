@@ -11,6 +11,8 @@ const projects = [
     category: "DATA",
     title: "Global Supply Chain Dashboard",
     stack: ["Power BI", "SQL", "Python"],
+    image: "/supply_chain_dashboard.png",
+    link: "#contact",
     result: "Built executive reporting systems that reduced reporting delays and uncovered multi-million-dollar operational bottlenecks.",
   },
   {
@@ -18,21 +20,54 @@ const projects = [
     category: "DATA",
     title: "Automated ETL Pipeline",
     stack: ["Python", "Airflow", "Snowflake"],
+    image: "/supply_chain_dashboard.png",
+    link: "#contact",
     result: "Designed scalable data workflows handling high-volume ingestion with strong uptime and governance.",
   },
   {
     id: 3,
     category: "DIGITAL",
-    title: "Elrix Energy – Solar EPC Website",
+    title: "Elrix Energy – Solar EPC Platform",
     stack: ["Next.js", "Tailwind", "SEO"],
-    result: "Built a production-ready solar platform focused on trust, lead generation, and search visibility.",
+    image: "/elrix_energy.png",
+    link: "https://www.elrixenergy.com/",
+    result: "Built a live, production-ready solar platform in India focused on trust, lead generation, and search visibility.",
   },
   {
     id: 4,
     category: "DIGITAL",
-    title: "Solar WhatsApp AI Assistant",
-    stack: ["OpenAI API", "Node.js", "WhatsApp Cloud"],
-    result: "Created automated lead qualification workflows to improve customer response speed and conversion.",
+    title: "La Sabroza – Taco Truck Website",
+    stack: ["React", "Framer Motion", "CSS Modules"],
+    image: "/la_sabroza.png",
+    link: "https://lasabroza-tacos.vercel.app/",
+    result: "Developed an immersive food truck website in Austin featuring modern 3D dynamic taco visuals and interactive menus.",
+  },
+  {
+    id: 5,
+    category: "DIGITAL",
+    title: "Homeplate Tacos – Static MVP",
+    stack: ["HTML", "Vanilla JS", "CSS"],
+    image: "/la_sabroza.png",
+    link: "https://homeplate717.vercel.app/",
+    result: "Built a fast, static 4-page site for an Austin taco truck, optimized for clean layout and client budget constraints.",
+  },
+  {
+    id: 6,
+    category: "DIGITAL",
+    title: "Lake City – Auto Body & Paint Shop",
+    stack: ["React", "Next.js", "CSS Modules"],
+    image: "/lake_city_auto.png",
+    link: "https://lakecitypaintandbody.vercel.app/",
+    result: "Created a high-fidelity workshop platform prototype featuring appointment integrations and responsive booking systems.",
+  },
+  {
+    id: 7,
+    category: "DIGITAL",
+    title: "Personal Portfolio Website MVP",
+    stack: ["Next.js", "R3F", "Framer Motion"],
+    image: "/portfolio_site.png",
+    link: "https://my-portfolio-lac-beta-99.vercel.app/",
+    result: "Designed a high-end portfolio utilizing WebGL shaders, particle canvas backdrops, and cybernetic themes.",
   },
 ];
 
@@ -79,9 +114,13 @@ export default function Projects() {
               className={styles.card}
             >
               <div className={styles.thumbnail}>
-                <div className={styles.thumbnailPlaceholder}>
-                  <ImageIcon size={48} />
-                </div>
+                {project.image ? (
+                  <img src={project.image} alt={project.title} className={styles.thumbnailImage} />
+                ) : (
+                  <div className={styles.thumbnailPlaceholder}>
+                    <ImageIcon size={48} />
+                  </div>
+                )}
               </div>
               <div className={styles.content}>
                 <motion.h3 
@@ -113,9 +152,14 @@ export default function Projects() {
                 >
                   {project.result}
                 </motion.p>
-                <button className={styles.viewBtn}>
-                  View Case Study <ArrowRight size={16} />
-                </button>
+                <a 
+                  href={project.link} 
+                  target={project.link.startsWith("http") ? "_blank" : "_self"} 
+                  rel="noopener noreferrer" 
+                  className={styles.viewBtn}
+                >
+                  {project.link.startsWith("http") ? "Visit Live Site" : "View Details"} <ArrowRight size={16} />
+                </a>
               </div>
             </motion.div>
           ))}
@@ -124,3 +168,4 @@ export default function Projects() {
     </section>
   );
 }
+
