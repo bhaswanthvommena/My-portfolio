@@ -90,6 +90,7 @@ const jsonLd = {
 };
 
 import Background3D from "@/components/Background3D";
+import Navbar from "@/components/Navbar";
 
 export default function RootLayout({
   children,
@@ -104,6 +105,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Background3D />
+        <Navbar />
         {children}
       </body>
     </html>

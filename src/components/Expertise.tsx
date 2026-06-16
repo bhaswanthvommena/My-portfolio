@@ -6,26 +6,34 @@ import { Database, Lightbulb, Sparkles, CheckCircle2 } from "lucide-react";
 
 const expertiseData = [
   {
-    title: "Data & Analytics",
+    title: "Data & Analytics Engineering",
     icon: Database,
-    description: "Need clarity from messy data? This is where I thrive.",
-    skills: ["SQL", "Python", "Dashboards", "KPI Systems", "Forecasting", "ETL Pipelines", "Business Intelligence"],
+    description: "5+ years of turning messy data into reliable, automated insights.",
+    skills: ["SQL", "Python", "Power BI / Tableau", "KPI Systems", "ETL Pipelines", "Business Intelligence"],
   },
   {
-    title: "Business & Growth",
-    icon: Lightbulb,
-    description: "I understand how businesses actually run.",
-    skills: ["Operations", "Customer Experience", "Procurement", "Sales Strategy", "Negotiation", "Growth Systems", "Stakeholder Management"],
+    title: "Agentic Workflow Automation",
+    icon: Sparkles,
+    description: "I build sophisticated AI agents to automate and scale business operations.",
+    skills: ["n8n", "Zapier / Make", "Voice Agents", "Hermes Agent", "CodeX Integration", "Permeli Workflows"],
   },
   {
     title: "AI Product Building",
-    icon: Sparkles,
-    description: "I turn ideas into real digital products quickly.",
-    skills: ["AI Workflows", "MVP Launches", "Website Systems", "Automations", "Rapid Prototyping", "Product Execution"],
+    icon: Lightbulb,
+    description: "I build real digital solutions from the ground up using modern AI tools.",
+    skills: ["SaaS Products", "MVPs", "Websites", "Cursor IDE", "Next.js / React", "Full-Stack Execution"],
   },
 ];
 
 export default function Expertise() {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
     <section id="expertise" className={styles.section}>
       <motion.h2 
@@ -45,6 +53,7 @@ export default function Expertise() {
             <motion.div
               key={index}
               className={styles.card}
+              onMouseMove={handleMouseMove}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

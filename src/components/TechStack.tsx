@@ -6,40 +6,38 @@ import { Database, FileJson, Layers, Monitor, Server, Cpu, Cloud, Code, Braces, 
 
 const toolGroups = [
   {
-    category: "Data",
+    category: "Data Analytics",
     items: [
       { name: "SQL", icon: Database },
       { name: "Python", icon: Terminal },
       { name: "Power BI", icon: Layers },
       { name: "Tableau", icon: Layers },
-      { name: "Excel", icon: FileJson },
+      { name: "Snowflake", icon: Cloud },
+    ]
+  },
+  {
+    category: "AI & Agents",
+    items: [
+      { name: "Anti-Gravity Permeli", icon: Sparkles },
+      { name: "Cloud Core CodeX", icon: Cloud },
+      { name: "Hermes Agent", icon: Cpu },
+      { name: "Stitch Cursor", icon: Code },
+    ]
+  },
+  {
+    category: "Automations",
+    items: [
+      { name: "n8n", icon: Layers },
+      { name: "Zapier", icon: FileJson },
+      { name: "Make", icon: Monitor },
     ]
   },
   {
     category: "Engineering",
     items: [
-      { name: "Snowflake", icon: Cloud },
-      { name: "BigQuery", icon: Database },
-      { name: "APIs", icon: Server },
-      { name: "ETL", icon: Code },
-      { name: "dbt", icon: Terminal },
-    ]
-  },
-  {
-    category: "Product",
-    items: [
-      { name: "React", icon: Code },
-      { name: "Next.js", icon: Monitor },
+      { name: "React / Next.js", icon: Code },
       { name: "Tailwind", icon: Braces },
-      { name: "Vercel", icon: Cloud },
-    ]
-  },
-  {
-    category: "AI",
-    items: [
-      { name: "Gemini", icon: Cpu },
-      { name: "GPT", icon: Sparkles },
-      { name: "Automations", icon: Layers },
+      { name: "APIs & ETL", icon: Server },
     ]
   }
 ];

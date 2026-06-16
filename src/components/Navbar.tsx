@@ -1,44 +1,49 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Hexagon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Navbar.module.css";
-import Link from "next/link";
+import { Download } from "lucide-react";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (window.scrollY > window.innerHeight * 0.8) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <motion.nav 
-      className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <Link href="/" className={styles.logo}>
-        <div className={styles.avatarWrapper}>
-          <img src="/profile.png" alt="Bhaswanth" className={styles.avatar} />
-        </div>
-        Bhaswanth
-      </Link>
-      
-      <div className={styles.navLinks}>
-        <Link href="/" className={styles.navLink}>Home</Link>
-        <Link href="#about" className={styles.navLink}>About</Link>
-        <Link href="#projects" className={styles.navLink}>Projects</Link>
-        <Link href="#experience" className={styles.navLink}>Experience</Link>
-        <Link href="#contact" className={styles.navLink}>Contact</Link>
-        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.hireBtn}>Resume</a>
-      </div>
-    </motion.nav>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.nav
+          className={styles.navbar}
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -100, opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          <div className={styles.container}>
+            <div className={styles.brand}>Bhaswanth</div>
+            <div className={styles.actions}>
+              <a href="https://www.linkedin.com/in/bhaswanthv/" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                LinkedIn
+              </a>
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                <Download size={16} /> Resume
+              </a>
+            </div>
+          </div>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 }

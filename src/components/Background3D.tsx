@@ -18,11 +18,13 @@ function ParticleField({ count = 2000 }) {
   }, [count]);
 
   const ref = useRef<THREE.Points>(null);
+  const timeRef = useRef(0);
   
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (ref.current) {
-      ref.current.rotation.y = state.clock.elapsedTime * 0.05;
-      ref.current.rotation.x = state.clock.elapsedTime * 0.03;
+      timeRef.current += delta;
+      ref.current.rotation.y = timeRef.current * 0.05;
+      ref.current.rotation.x = timeRef.current * 0.03;
     }
   });
 
@@ -107,11 +109,13 @@ function NeuralNetwork({ count = 25 }) {
 function FloatingRings({ scrollProgress }: { scrollProgress: any }) {
   const ref = useRef<THREE.Group>(null);
   const rotationZ = useTransform(scrollProgress, [0, 1], [0, Math.PI * 4]);
+  const timeRef = useRef(0);
   
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (ref.current) {
-      ref.current.rotation.z = rotationZ.get() + state.clock.elapsedTime * 0.05;
-      ref.current.rotation.y = state.clock.elapsedTime * 0.1;
+      timeRef.current += delta;
+      ref.current.rotation.z = rotationZ.get() + timeRef.current * 0.05;
+      ref.current.rotation.y = timeRef.current * 0.1;
     }
   });
 
@@ -132,10 +136,12 @@ function FloatingRings({ scrollProgress }: { scrollProgress: any }) {
 function TechCore({ scrollProgress }: { scrollProgress: any }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const scale = useTransform(scrollProgress, [0, 0.5, 1], [1.5, 4, 1.5]);
+  const timeRef = useRef(0);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (meshRef.current) {
-      const time = state.clock.elapsedTime;
+      timeRef.current += delta;
+      const time = timeRef.current;
       meshRef.current.rotation.x = time * 0.05;
       meshRef.current.rotation.y = time * 0.08;
       meshRef.current.scale.setScalar(scale.get());

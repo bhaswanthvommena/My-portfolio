@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "./Timeline.module.css";
 
 const experiences = [
@@ -37,8 +38,17 @@ const experiences = [
 ];
 
 export default function Timeline() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section id="experience" className={styles.section}>
+    <section id="experience" className={styles.section} ref={containerRef}>
       <motion.h2 
         className={styles.heading}
         initial={{ opacity: 0, y: 20 }}
@@ -49,6 +59,10 @@ export default function Timeline() {
       </motion.h2>
 
       <div className={styles.timeline}>
+        <motion.div 
+          className={styles.timelineProgress} 
+          style={{ height: lineHeight }} 
+        />
         {experiences.map((exp, index) => (
           <motion.div 
             key={index} 

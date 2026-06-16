@@ -3,35 +3,47 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Projects.module.css";
-import { ArrowRight, Image as ImageIcon } from "lucide-react";
+import { ArrowRight, Image as ImageIcon, X, ExternalLink } from "lucide-react";
 
-const projects = [
-  {
-    id: 1,
-    category: "DATA",
-    title: "Global Supply Chain Dashboard",
-    stack: ["Power BI", "SQL", "Python"],
-    image: "/supply_chain_dashboard.png",
-    link: "#contact",
-    result: "Built executive reporting systems that reduced reporting delays and uncovered multi-million-dollar operational bottlenecks.",
-  },
-  {
-    id: 2,
-    category: "DATA",
-    title: "Automated ETL Pipeline",
-    stack: ["Python", "Airflow", "Snowflake"],
-    image: "/supply_chain_dashboard.png",
-    link: "#contact",
-    result: "Designed scalable data workflows handling high-volume ingestion with strong uptime and governance.",
-  },
+const GithubIcon = ({ size, className }: { size: number; className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+    <path d="M9 18c-4.51 2-5-2-7-2"/>
+  </svg>
+);
+
+type CaseStudy = {
+  problem: string;
+  solution: string;
+  impact: string;
+};
+
+type Project = {
+  id: number;
+  category: "DATA" | "DIGITAL";
+  title: string;
+  stack: string[];
+  image?: string;
+  link?: string;
+  githubLink?: string;
+  result: string;
+  caseStudy?: CaseStudy;
+};
+
+const projects: Project[] = [
   {
     id: 3,
     category: "DIGITAL",
     title: "Elrix Energy – Solar EPC Platform",
-    stack: ["Next.js", "Tailwind", "SEO"],
+    stack: ["Next.js", "Tailwind", "SEO", "Analytics"],
     image: "/elrix_energy.png",
     link: "https://www.elrixenergy.com/",
-    result: "Built a live, production-ready solar platform in India focused on trust, lead generation, and search visibility.",
+    result: "Built a robust, feature-rich corporate platform for South India's trusted Solar EPC company to drive lead generation.",
+    caseStudy: {
+      problem: "The client needed a robust corporate platform to educate users on solar energy, promote PM Surya Ghar government subsidies, and generate leads for residential, commercial, and industrial projects.",
+      solution: "Developed an interactive web app featuring a dynamic Solar Savings Calculator, a content-rich FAQ/blog architecture for SEO, and cookie preference management. Integrated Google Analytics and Meta Pixel for ad tracking.",
+      impact: "Captures immediate leads through floating WhatsApp widgets and prominent CTAs, while a styled review showcase displaying 5-star ratings builds strong regional trust and consumer confidence."
+    }
   },
   {
     id: 4,
@@ -47,7 +59,7 @@ const projects = [
     category: "DIGITAL",
     title: "Homeplate Tacos – Static MVP",
     stack: ["HTML", "Vanilla JS", "CSS"],
-    image: "/la_sabroza.png",
+    image: "/la_sabroza.png", // [PLACEHOLDER] Need new image
     link: "https://homeplate717.vercel.app/",
     result: "Built a fast, static 4-page site for an Austin taco truck, optimized for clean layout and client budget constraints.",
   },
@@ -57,8 +69,13 @@ const projects = [
     title: "Lake City – Auto Body & Paint Shop",
     stack: ["React", "Next.js", "CSS Modules"],
     image: "/lake_city_auto.png",
-    link: "https://lakecitypaintandbody.vercel.app/",
-    result: "Created a high-fidelity workshop platform prototype featuring appointment integrations and responsive booking systems.",
+    link: "https://lakecityautoandbody.com",
+    result: "Created a professional, trust-building corporate website emphasizing absolute integrity, lifetime guarantees, and expert craftsmanship.",
+    caseStudy: {
+      problem: "A premier collision repair shop in Denton, Texas needed a professional web presence to showcase their legacy, structure their services, and build trust with prospective clients.",
+      solution: "Designed a clean, structured UI detailing specific disciplines (Structural Collision Repair, Paintless Dent Repair). Implemented a dedicated 'Seamless Process' section to alleviate customer stress regarding insurance claims.",
+      impact: "Strategically placed CTAs ('Book an Appointment', 'Get an Estimate') drive conversions, while 15+ year legacy badges, BBB A+ certifications, and client feedback quotes establish robust social proof."
+    }
   },
   {
     id: 7,
@@ -67,16 +84,21 @@ const projects = [
     stack: ["Next.js", "R3F", "Framer Motion"],
     image: "/portfolio_site.png",
     link: "https://my-portfolio-lac-beta-99.vercel.app/",
+    githubLink: "https://github.com/bhaswanthvommena18-jpg",
     result: "Designed a high-end portfolio utilizing WebGL shaders, particle canvas backdrops, and cybernetic themes.",
   },
 ];
 
 export default function Projects() {
-  const [filter, setFilter] = useState("ALL");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const filteredProjects = projects.filter(
-    (p) => filter === "ALL" || p.category === filter
-  );
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
 
   return (
     <section id="projects" className={styles.section}>
@@ -89,21 +111,9 @@ export default function Projects() {
         Here’s What <span className="gradient-text">I’ve Built.</span>
       </motion.h2>
 
-      <div className={styles.filterContainer}>
-        {["ALL", "DATA", "DIGITAL"].map((f) => (
-          <button
-            key={f}
-            className={`${styles.filterBtn} ${filter === f ? styles.active : ""}`}
-            onClick={() => setFilter(f)}
-          >
-            {f === "ALL" ? "All Projects" : f === "DATA" ? "Data Projects" : "Digital Projects"}
-          </button>
-        ))}
-      </div>
-
       <motion.div layout className={styles.grid}>
         <AnimatePresence>
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <motion.div
               key={project.id}
               layout
@@ -112,6 +122,7 @@ export default function Projects() {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
               className={styles.card}
+              onMouseMove={handleMouseMove}
             >
               <div className={styles.thumbnail}>
                 {project.image ? (
@@ -152,19 +163,91 @@ export default function Projects() {
                 >
                   {project.result}
                 </motion.p>
-                <a 
-                  href={project.link} 
-                  target={project.link.startsWith("http") ? "_blank" : "_self"} 
-                  rel="noopener noreferrer" 
-                  className={styles.viewBtn}
-                >
-                  {project.link.startsWith("http") ? "Visit Live Site" : "View Details"} <ArrowRight size={16} />
-                </a>
+                <div className={styles.actionContainer}>
+                  {project.caseStudy && (
+                    <button onClick={() => setSelectedProject(project)} className={styles.viewBtn}>
+                      Read Case Study <ArrowRight size={16} />
+                    </button>
+                  )}
+                  {project.link && (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className={styles.viewBtn}
+                    >
+                      Visit Live Site <ExternalLink size={16} />
+                    </a>
+                  )}
+                  {project.githubLink && (
+                    <a 
+                      href={project.githubLink !== "#" ? project.githubLink : undefined} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className={`${styles.viewBtn} ${styles.githubBtn}`}
+                      onClick={(e) => project.githubLink === "#" && e.preventDefault()}
+                    >
+                      View GitHub <GithubIcon size={16} />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>
+
+      {/* Case Study Modal */}
+      <AnimatePresence>
+        {selectedProject && selectedProject.caseStudy && (
+          <motion.div
+            className={styles.modalBackdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              className={styles.modalContent}
+              initial={{ y: 50, opacity: 0, scale: 0.95 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 20, opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className={styles.closeButton} onClick={() => setSelectedProject(null)}>
+                <X size={24} />
+              </button>
+              
+              <div className={styles.modalHeader}>
+                <h3 className={styles.modalTitle}>{selectedProject.title}</h3>
+                <div className={styles.modalStack}>
+                  {selectedProject.stack.map(s => (
+                    <span key={s} className={styles.modalTag}>{s}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.modalBody}>
+                <div className={styles.caseStudySection}>
+                  <h4 className="gradient-text">The Challenge</h4>
+                  <p>{selectedProject.caseStudy.problem}</p>
+                </div>
+                
+                <div className={styles.caseStudySection}>
+                  <h4 className="gradient-text">My Solution & Architecture</h4>
+                  <p>{selectedProject.caseStudy.solution}</p>
+                </div>
+                
+                <div className={styles.caseStudySection}>
+                  <h4 className="gradient-text">Impact & Results</h4>
+                  <p>{selectedProject.caseStudy.impact}</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

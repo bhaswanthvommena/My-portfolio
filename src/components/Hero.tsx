@@ -60,7 +60,7 @@ export default function Hero() {
             </h1>
             
             <p className={styles.subtitle}>
-              Welcome — I build data solutions, business systems, and modern AI-powered products that solve real problems.
+              I leverage 5+ years in data analytics to architect and build intelligent SaaS products, automated voice agents, high-converting websites, and sophisticated agentic workflows.
             </p>
 
             <div className={styles.ctaContainer}>

@@ -24,7 +24,17 @@
   left: 20px;
   height: 100%;
   width: 2px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timelineProgress {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--neon-blue), var(--accent));
+  box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--accent);
+  z-index: 1;
 }
 
 .item {

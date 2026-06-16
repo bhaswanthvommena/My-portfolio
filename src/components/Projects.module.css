@@ -62,12 +62,35 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
 
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
 .thumbnail {
   width: 100%;
   height: 300px;
   background: #1a1a1a;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .thumbnailPlaceholder {
@@ -85,6 +108,8 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .title {
@@ -117,17 +142,41 @@
   flex-grow: 1;
 }
 
+.actionContainer {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .viewBtn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   color: var(--primary);
   font-weight: 600;
-  transition: gap 0.2s;
+  transition: gap 0.2s, color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
 }
 
 .card:hover .viewBtn {
   gap: 0.75rem;
+}
+
+.viewBtn:hover {
+  color: var(--neon-blue);
+}
+
+.githubBtn {
+  color: #aaa;
+}
+
+.githubBtn:hover {
+  color: #fff;
 }
 
 .thumbnailImage {
@@ -140,5 +189,131 @@
 
 .card:hover .thumbnailImage {
   transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modalContent {
+  background: rgba(15, 15, 18, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+}
+
+.closeButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.modalHeader {
+  padding: 3rem 3rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02), transparent);
+}
+
+.modalTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.modalStack {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modalTag {
+  padding: 0.35rem 1rem;
+  background: rgba(0, 242, 255, 0.1);
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--neon-blue);
+  font-weight: 500;
+}
+
+.modalBody {
+  padding: 3rem;
+}
+
+.caseStudySection {
+  margin-bottom: 3rem;
+}
+
+.caseStudySection:last-child {
+  margin-bottom: 0;
+}
+
+.caseStudySection h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: inline-block;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.caseStudySection p {
+  color: #aaa;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .modalHeader, .modalBody {
+    padding: 2rem;
+  }
+  
+  .modalTitle {
+    font-size: 2rem;
+  }
+  
+  .modalBackdrop {
+    padding: 1rem;
+  }
 }
 

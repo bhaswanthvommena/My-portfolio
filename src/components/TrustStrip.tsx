@@ -5,11 +5,11 @@ import { Database, Zap, Code, Briefcase, Globe } from "lucide-react";
 import styles from "./TrustStrip.module.css";
 
 const items = [
-  { text: "Data Engineering Mindset", icon: Database },
-  { text: "Entrepreneurial Experience", icon: Briefcase },
-  { text: "AI Builder", icon: Zap },
-  { text: "Website Creator", icon: Globe },
-  { text: "Problem Solver", icon: Code },
+  { text: "Senior Data Analyst", icon: Database },
+  { text: "Agentic Workflow Automation", icon: Zap },
+  { text: "AI Product Builder", icon: Globe },
+  { text: "Fast MVP Prototyping", icon: Code },
+  { text: "5+ Years Experience", icon: Briefcase },
 ];
 
 export default function TrustStrip() {
