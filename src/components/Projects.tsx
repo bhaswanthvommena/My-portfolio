@@ -45,6 +45,19 @@ const projects: Project[] = [
     }
   },
   {
+    id: 2,
+    category: "DIGITAL",
+    title: "Enterprise RAG Chatbot",
+    stack: ["React", "Framer Motion", "LLM Prompting"],
+    link: "/projects/rag-chatbot",
+    result: "Prototyped a Retrieval-Augmented Generation (RAG) chatbot interface allowing users to query connected corporate knowledge bases.",
+    caseStudy: {
+      problem: "Needed a way to demonstrate AI Product Building skills by showcasing how an enterprise might interact with proprietary data (PDFs, SQL databases) via an AI chat interface.",
+      solution: "Engineered a highly polished, interactive React prototype with simulated 'Agentic Thinking' states (vector search, chunk retrieval) and real-time streaming text effects.",
+      impact: "Provides a zero-latency, zero-cost portfolio demonstration of complex AI workflow orchestration, proving front-end prototyping and AI UX capabilities."
+    }
+  },
+  {
     id: 3,
     category: "DIGITAL",
     title: "Elrix Energy – Solar EPC Platform",
