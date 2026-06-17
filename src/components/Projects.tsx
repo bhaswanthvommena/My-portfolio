@@ -36,6 +36,7 @@ const projects: Project[] = [
     category: "DATA",
     title: "Global Supply Chain Dashboard",
     stack: ["Python", "Pandas", "Next.js", "Recharts"],
+    image: "/supply_chain_dashboard.png",
     link: "/projects/supply-chain",
     result: "Built an autonomous ETL pipeline processing global shipping records to identify routing bottlenecks and visualize revenue streams.",
     caseStudy: {
@@ -49,6 +50,7 @@ const projects: Project[] = [
     category: "DIGITAL",
     title: "Enterprise RAG Chatbot",
     stack: ["React", "Framer Motion", "LLM Prompting"],
+    image: "/rag_chatbot_ui.png",
     link: "/projects/rag-chatbot",
     result: "Prototyped a Retrieval-Augmented Generation (RAG) chatbot interface allowing users to query connected corporate knowledge bases.",
     caseStudy: {
@@ -83,9 +85,9 @@ const projects: Project[] = [
   {
     id: 5,
     category: "DIGITAL",
-    title: "Homeplate Tacos – Static MVP",
+    title: "Homeplate 717 -Food truck",
     stack: ["HTML", "Vanilla JS", "CSS"],
-    image: "/la_sabroza.png", // [PLACEHOLDER] Need new image
+    image: "/homeplate_717.png",
     link: "https://homeplate717.vercel.app/",
     result: "Built a fast, static 4-page site for an Austin taco truck, optimized for clean layout and client budget constraints.",
   },

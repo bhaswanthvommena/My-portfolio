@@ -16,12 +16,21 @@ const toolGroups = [
     ]
   },
   {
-    category: "AI & Agents",
+    category: "AI IDEs",
     items: [
-      { name: "Anti-Gravity Permeli", icon: Sparkles },
-      { name: "Cloud Core CodeX", icon: Cloud },
-      { name: "Hermes Agent", icon: Cpu },
-      { name: "Stitch Cursor", icon: Code },
+      { name: "Antigravity IDE", icon: Sparkles },
+      { name: "Cursor", icon: Code },
+      { name: "Claude Code", icon: Terminal },
+      { name: "Codex", icon: Cpu },
+    ]
+  },
+  {
+    category: "AI Tools",
+    items: [
+      { name: "NotebookLM", icon: FileJson },
+      { name: "Pomelli", icon: Layers },
+      { name: "Stitch", icon: Braces },
+      { name: "Flow", icon: Cloud },
     ]
   },
   {
