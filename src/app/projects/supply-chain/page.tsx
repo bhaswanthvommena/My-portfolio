@@ -94,7 +94,7 @@ export default function SupplyChainDashboard() {
                   <YAxis stroke="#888" tickFormatter={(val) => `$${(val/1000000).toFixed(0)}M`} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'rgba(10,10,12,0.9)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
-                    formatter={(val: number) => formatCurrency(val)}
+                    formatter={(val: any) => formatCurrency(Number(val))}
                   />
                   <Area type="monotone" dataKey="value" stroke="#00f2ff" fillOpacity={1} fill="url(#colorSales)" />
                 </AreaChart>
@@ -114,7 +114,7 @@ export default function SupplyChainDashboard() {
                   <Tooltip 
                     cursor={{fill: 'rgba(255,255,255,0.05)'}}
                     contentStyle={{ backgroundColor: 'rgba(10,10,12,0.9)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
-                    formatter={(val: number) => formatCurrency(val)}
+                    formatter={(val: any) => formatCurrency(Number(val))}
                   />
                   <Bar dataKey="value" fill="#7928ca" radius={[0, 4, 4, 0]} />
                 </BarChart>
