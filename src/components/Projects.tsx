@@ -32,6 +32,19 @@ type Project = {
 
 const projects: Project[] = [
   {
+    id: 1,
+    category: "DATA",
+    title: "Global Supply Chain Dashboard",
+    stack: ["Python", "Pandas", "Next.js", "Recharts"],
+    link: "/projects/supply-chain",
+    result: "Built an autonomous ETL pipeline processing global shipping records to identify routing bottlenecks and visualize revenue streams.",
+    caseStudy: {
+      problem: "Needed to process and aggregate a massive Kaggle supply chain dataset (180k+ rows) to uncover shipping delays and late delivery risks across global markets.",
+      solution: "Engineered a Python ETL script leveraging Pandas to clean, aggregate, and export the raw CSV into optimized JSON. Built a Next.js front-end using Recharts for interactive data visualization.",
+      impact: "Successfully automated the data extraction and transformation process, culminating in a beautiful dark-mode dashboard that highlights high-risk regions and top-performing categories."
+    }
+  },
+  {
     id: 3,
     category: "DIGITAL",
     title: "Elrix Energy – Solar EPC Platform",
@@ -172,7 +185,7 @@ export default function Projects() {
                   {project.link && (
                     <a 
                       href={project.link} 
-                      target="_blank" 
+                      target={project.link.startsWith("http") ? "_blank" : "_self"} 
                       rel="noopener noreferrer" 
                       className={styles.viewBtn}
                     >
